@@ -9,6 +9,9 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
   },
+  repositoryList: {
+    width: "100%"
+  }
 });
 
 export default function Main()
@@ -16,7 +19,9 @@ export default function Main()
     return (
         <View style={styles.container}>
             <AppBar />
-            <RepositoryList />
+            <View style={styles.repositoryList}>
+                <RepositoryList style={styles.repositoryList} />
+            </View>
         </View>
     );
 }
