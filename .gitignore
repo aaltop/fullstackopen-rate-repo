@@ -1,5 +1,13 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
+
+*.*
+!*.js
+!package.json
+!package-lock.json
+!app.json
+!babel.config.js
+
 # dependencies
 node_modules/
 
