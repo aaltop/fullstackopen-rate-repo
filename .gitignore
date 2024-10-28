@@ -3,6 +3,7 @@
 
 *.*
 !*.js
+!*.jsx
 !package.json
 !package-lock.json
 !app.json
