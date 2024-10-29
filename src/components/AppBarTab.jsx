@@ -9,16 +9,19 @@ export default function AppBarTab({ text, path })
 {
     const style = StyleSheet.create({
         styling: {
-            flexGrow: 1,
+            flexGrow: 0,
+            width: 100,
             backgroundColor: theme.colors.primary,
-            color: "#ffffff",
-            textAlign: "center",
-            verticalAlign: "middle",
+            justifyContent: "center"
+        },
+        text: {
+            color: "#fff",
+            textAlign: "center"
         }
     });
 
     return <Link style={style.styling} to={path}>
-        <Text style={[style.styling]}>
+        <Text style={style.text}>
             {text}
         </Text>
     </Link>;
