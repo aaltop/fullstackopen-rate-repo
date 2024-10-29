@@ -7,7 +7,7 @@ import { StyleSheet } from "react-native";
 export const languageTag = StyleSheet.create({
     style: {
         backgroundColor: theme.colors.languageTag,
-        borderRadius: 2,
+        borderRadius: 5,
         padding: 5,
         color: '#ffffff'
     }

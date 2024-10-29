@@ -16,7 +16,7 @@ export default function AppBarTab({ text })
         }
     });
 
-    return <Pressable style={style.styling}  onPress={ev => console.log(ev.target.innerText)}>
+    return <Pressable style={style.styling}  onPress={_ev => console.log(text)}>
         <Text style={[style.styling]}>
             {text}
         </Text>

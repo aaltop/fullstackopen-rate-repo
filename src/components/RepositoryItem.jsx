@@ -1,7 +1,8 @@
 import { languageTag } from "../styles";
 import Text from "./Text";
+import Stat from "./Stat";
 
-import { StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 
 
 
@@ -20,7 +21,7 @@ export default function RepositoryItem({ item })
         ownerAvatarUrl,
     } = item;
 
-    const styles = StyleSheet.create({
+    const viewStyles = StyleSheet.create({
         container: {
             width: "100%",
         },
@@ -29,49 +30,56 @@ export default function RepositoryItem({ item })
         },
         info: {
             alignItems: "flex-start",
+            flexGrow: 1,
+            width: 0,
+            gap: 5
         },
         infoAndPicture: {
             flexDirection: "row",
         },
         stats: {
             flexDirection: "row",
-            gap: 5
+            flexWrap: "wrap"
+        }
+    });
+
+    const styles = StyleSheet.create({
+        avatarImage: {
+            width: 50,
+            height: 50,
+            margin: 10,
+            borderRadius: 10
+        },
+        languageTag: {
         }
     });
 
     return (
-        <View style={styles.container}>
-            <View style={styles.infoAndPicture}>
-                <View style={styles.picture}>
-                    <Text>
-                        An Image here
-                    </Text>
+        <View style={viewStyles.container}>
+            <View style={viewStyles.infoAndPicture}>
+                <View style={viewStyles.picture}>
+                    <Image
+                        style={styles.avatarImage}
+                        source={{ uri: ownerAvatarUrl }}
+                    ></Image>
                 </View>
-                <View style={styles.info}>
+                <View style={viewStyles.info}>
                     <Text fontWeight="bold">
                         {fullName}
                     </Text>
                     <Text>
                         {description}
                     </Text>
-                    <Text style={[languageTag.style, { flexGrow: 0}]}>
+                    <Text style={[languageTag.style, styles.languageTag]}>
                         {language}
                     </Text>
                 </View>
             </View>
-            <View style={styles.stats}>
-                <Text>
-                    Stars: {stargazersCount}
-                </Text>
-                <Text>
-                    Forks: {forksCount}
-                </Text>
-                <Text>
-                    Reviews: {reviewCount}
-                </Text>
-                <Text>
-                    Rating: {ratingAverage}
-                </Text>
+            <View style={viewStyles.stats}>
+                <Stat number={stargazersCount} text={"Stars"} />
+                <Stat number={forksCount} text={"Forks"} />
+                <Stat number={reviewCount} text={"Reviews"} />
+                <Stat number={ratingAverage} text={"Rating"} />
             </View>
         </View>
     );
