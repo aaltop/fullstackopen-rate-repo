@@ -10,7 +10,7 @@ export default function RepositoryItem({ item })
 {
 
     const {
-        id,
+        _id,
         fullName,
         description,
         language,
