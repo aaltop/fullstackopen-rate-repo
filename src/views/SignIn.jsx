@@ -1,9 +1,20 @@
-import Text from "../components/Text";
 import TextInput from "../components/TextInput";
-import { inputSize } from "../styles";
+import { formikErrorCheck } from "../utils";
 
 import { Formik } from "formik";
 import { View, Button, StyleSheet } from "react-native";
+import * as yup from "yup";
+
+const loginSchema = yup.object().shape({
+    username: yup.string()
+        .min(3, "Username should be at least 3 characters")
+        .max(32, "Username should be at most 32 characters")
+        .required("Username is required"),
+    password: yup.string()
+        .min(8, "Password should be at least 8 characters")
+        .max(20, "Password should be at most 20 characters")
+        .required("Password is required")
+});
 
 const styles = StyleSheet.create({
     container: {
@@ -21,18 +32,21 @@ export default function SignIn()
         <Formik
             initialValues={{username: "", password: ""}}
             onSubmit={values => console.log(values)}
+            validationSchema={loginSchema}
         >
-            {({ handleChange, handleSubmit, values }) => (
+            {({ handleChange, handleSubmit, values, ...props }) => (
                 <View
                     style={styles.container}
                 >
                     <TextInput
+                        errorMessage={formikErrorCheck(props, "username") ?? props.errors.username}
                         placeholder="Username"
                         value={values.username}
                         onChangeText={handleChange("username")}
                     />
                     <TextInput
-                        placeholder={"Password"}
+                        errorMessage={formikErrorCheck(props, "password") ?? props.errors.password}
+                        placeholder="Password"
                         value={values.password}
                         onChangeText={handleChange("password")}
                         secureTextEntry

@@ -14,22 +14,39 @@ const styles = StyleSheet.create({
         borderStyle: "solid",
         borderColor: theme.colors.offWhite,
         flexGrow: 1
+    },
+    inputError: {
+        borderColor: "red"
+    },
+    error: {
+        color: "red"
     }
 });
 
-export default function TextInput({ label, ...props })
+export default function TextInput({ label, errorMessage, ...props })
 {
 
     const labelComp = label ? <Text>{label}</Text> : null;
 
+    const hasError = !!errorMessage;
+    const errorComp = hasError
+        ? <Text style={styles.error}>{errorMessage}</Text>
+        : null;
+
     return (
-        <View style={styles.container}>
-            {labelComp}
-            <BaseTextInput
-                style={[styles.input, inputSize.style]}
-                selectionColor={"black"}
-                {...props}
-            />
+        <View>
+            <View style={styles.container}>
+                {labelComp}
+                <BaseTextInput
+                    style={[styles.input,
+                        inputSize.style,
+                        hasError && styles.inputError
+                    ]}
+                    selectionColor={"black"}
+                    {...props}
+                />
+            </View>
+            {errorComp}
         </View>
     );
 }
