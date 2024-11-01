@@ -12,3 +12,10 @@ export const languageTag = StyleSheet.create({
         color: '#ffffff'
     }
 });
+
+export const inputSize = StyleSheet.create({
+    style: {
+        height: 60,
+        fontSize: 16
+    }
+});
