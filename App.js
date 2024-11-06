@@ -1,8 +1,15 @@
 import Main from "./src/Main";
+import createApolloClient from "./src/utils/apolloClient";
+
+import { ApolloProvider } from "@apollo/client";
+
+const apolloClient = createApolloClient();
 
 export default function App() 
 {
   return (
-    <Main />
+    <ApolloProvider client={apolloClient}>
+        <Main />
+    </ApolloProvider>
   );
 }
