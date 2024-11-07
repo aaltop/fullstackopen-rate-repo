@@ -1,5 +1,6 @@
 import TextInput from "../components/TextInput";
 import { formikErrorCheck } from "../utils";
+import useSignIn from "../hooks/signIn";
 
 import { Formik } from "formik";
 import { View, Button, StyleSheet } from "react-native";
@@ -28,10 +29,22 @@ const styles = StyleSheet.create({
 
 export default function SignIn()
 {
+    const [signIn, result] = useSignIn();
+
+    async function onSubmit(credentials)
+    {
+        try {
+            const { data } = await signIn(credentials);
+            console.log(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <Formik
             initialValues={{username: "", password: ""}}
-            onSubmit={values => console.log(values)}
+            onSubmit={onSubmit}
             validationSchema={loginSchema}
         >
             {({ handleChange, handleSubmit, values, ...props }) => (
@@ -55,6 +68,7 @@ export default function SignIn()
                         style={{height: 60}}
                         onPress={handleSubmit}
                         title="Login"
+                        disabled={result.loading}
                     />
                 </View>
             )}
