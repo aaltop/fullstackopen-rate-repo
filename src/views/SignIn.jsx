@@ -1,6 +1,7 @@
 import TextInput from "../components/TextInput";
 import { formikErrorCheck } from "../utils";
 import useSignIn from "../hooks/signIn";
+import AuthStorage from "../utils/authStorage";
 
 import { Formik } from "formik";
 import { View, Button, StyleSheet } from "react-native";
@@ -31,11 +32,16 @@ export default function SignIn()
 {
     const [signIn, result] = useSignIn();
 
+    const authStorage = new AuthStorage();
+
     async function onSubmit(credentials)
     {
         try {
             const { data } = await signIn(credentials);
             console.log(data);
+            const token = data.authenticate.accessToken;
+            await authStorage.setAccessToken(token);
+            console.log("auth storage token: ", await authStorage.getAccessToken());
         } catch (error) {
             console.log(error);
         }
