@@ -14,7 +14,6 @@ export default function useSignIn()
     async function signIn(credentials)
     {
         const { data } = await mutate({ variables: { credentials }});
-        console.log(data);
         if (result.error) {
             console.log(result.error);
             return null;
