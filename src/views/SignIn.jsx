@@ -1,11 +1,12 @@
 import TextInput from "../components/TextInput";
 import { formikErrorCheck } from "../utils";
 import useSignIn from "../hooks/signIn";
-import AuthStorage from "../utils/authStorage";
+import paths from "../paths";
 
 import { Formik } from "formik";
 import { View, Button, StyleSheet } from "react-native";
 import * as yup from "yup";
+import { useNavigate } from "react-router-native";
 
 const loginSchema = yup.object().shape({
     username: yup.string()
@@ -31,17 +32,15 @@ const styles = StyleSheet.create({
 export default function SignIn()
 {
     const [signIn, result] = useSignIn();
-
-    const authStorage = new AuthStorage();
+    const navigate = useNavigate();
 
     async function onSubmit(credentials)
     {
         try {
-            const { data } = await signIn(credentials);
-            console.log(data);
-            const token = data.authenticate.accessToken;
-            await authStorage.setAccessToken(token);
-            console.log("auth storage token: ", await authStorage.getAccessToken());
+            const token = await signIn(credentials);
+            if (token !== null) {
+                navigate(paths.home);
+            }
         } catch (error) {
             console.log(error);
         }

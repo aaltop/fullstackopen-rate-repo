@@ -1,6 +1,7 @@
 import RepositoryList from './components/RepositoryList';
 import AppBar from "./components/AppBar";
 import SignIn from "./views/SignIn";
+import paths from './paths';
 
 import { NativeRouter, Route, Routes } from 'react-router-native';
 import { StyleSheet, View } from 'react-native';
@@ -24,11 +25,11 @@ export default function Main()
                 
                 <Routes>
                     <Route
-                        path="/"
+                        path={paths.repositories}
                         element={<RepositoryList />}
                     />
                     <Route
-                        path="/login"
+                        path={paths.login}
                         element={<SignIn />}
                     />
                 </Routes>
