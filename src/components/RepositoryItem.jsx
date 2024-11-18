@@ -3,8 +3,43 @@ import Text from "./Text";
 import Stat from "./Stat";
 
 import { Image, StyleSheet, View, Button } from "react-native";
+import { openURL } from "expo-linking";
 
+const viewStyles = StyleSheet.create({
+    container: {
+        width: "100%",
+    },
+    picture: {
+        flexGrow: 0
+    },
+    info: {
+        alignItems: "flex-start",
+        flexGrow: 1,
+        width: 0,
+        gap: 5
+    },
+    infoAndPicture: {
+        flexDirection: "row",
+    },
+    stats: {
+        flexDirection: "row",
+        flexWrap: "wrap"
+    },
+    button: {
+        margin: 20
+    }
+});
 
+const styles = StyleSheet.create({
+    avatarImage: {
+        width: 50,
+        height: 50,
+        margin: 10,
+        borderRadius: 10
+    },
+    languageTag: {
+    }
+});
 
 export default function RepositoryItem({ item, showOpenUrl })
 {
@@ -19,43 +54,18 @@ export default function RepositoryItem({ item, showOpenUrl })
         ratingAverage,
         reviewCount,
         ownerAvatarUrl,
+        url
     } = item;
 
-    const viewStyles = StyleSheet.create({
-        container: {
-            width: "100%",
-        },
-        picture: {
-            flexGrow: 0
-        },
-        info: {
-            alignItems: "flex-start",
-            flexGrow: 1,
-            width: 0,
-            gap: 5
-        },
-        infoAndPicture: {
-            flexDirection: "row",
-        },
-        stats: {
-            flexDirection: "row",
-            flexWrap: "wrap"
-        },
-        button: {
-            margin: 20
-        }
-    });
+    let openPending = false;
 
-    const styles = StyleSheet.create({
-        avatarImage: {
-            width: 50,
-            height: 50,
-            margin: 10,
-            borderRadius: 10
-        },
-        languageTag: {
-        }
-    });
+    async function openOnGithub()
+    {
+        const openingStatus = openURL(url);
+        openPending = true;
+        await openingStatus;
+        openPending = false;
+    }
 
     return (
         <View style={viewStyles.container}>
@@ -88,9 +98,13 @@ export default function RepositoryItem({ item, showOpenUrl })
                 showOpenUrl
                     ? <View style={viewStyles.button}>
                     <Button
-                        onPress={() => console.log("Hallo")}
-                        title="Open on Github"
-                        di
+                        onPress={openOnGithub}
+                        title={
+                            openPending
+                                ? "Opening..."
+                                : "Open on Github"
+                        }
+                        disabled={openPending}
                     />
                 </View>
                     : null

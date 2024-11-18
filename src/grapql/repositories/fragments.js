@@ -12,5 +12,6 @@ export const REPOSITORY_ITEM = gql`
         ratingAverage
         reviewCount
         ownerAvatarUrl
+        url
     }
 `;
