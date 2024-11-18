@@ -1,4 +1,5 @@
 import Text from "./Text";
+import { numberInThousands } from "../utils/misc";
 
 import { View, StyleSheet } from "react-native";
 
@@ -12,11 +13,7 @@ const viewStyles = StyleSheet.create({
 
 export default function Stat({ number, text })
 {
-    // round to precision in integers, then divide further to
-    // get the actual wanted magnitude (in thousands in this case)
-    const renderedNum = number < 1000
-        ? number
-        : Math.round(number/100)/10 + "k";
+    const renderedNum = numberInThousands(number);
 
     return <View style={viewStyles.container}>
         <Text fontWeight="bold">

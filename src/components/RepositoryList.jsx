@@ -56,22 +56,32 @@ const styles = StyleSheet.create({
       height: 10,
       backgroundColor: theme.colors.offWhite
     }
-  });
+});
 
 const ItemSeparator = () => <View style={styles.separator} />;
+
+export function RepositoryListContainer({ repositories, style })
+{
+
+        return (
+            <FlatList
+                style={style}
+                data={repositories}
+                ItemSeparatorComponent={ItemSeparator}
+                renderItem={RepositoryItem}
+            />
+        );
+}
+
 
 const RepositoryList = ({ style }) => {
 
     const repositories = useRepositories();
 
-    return (
-        <FlatList
-            style={style}
-            data={repositories}
-            ItemSeparatorComponent={ItemSeparator}
-            renderItem={RepositoryItem}
-        />
-    );
+    return <RepositoryListContainer
+        repositories={repositories}
+        style={style}
+    />;
 };
 
 export default RepositoryList;
