@@ -1,7 +1,12 @@
-import RepositoryList from './components/RepositoryList';
-import AppBar from "./components/AppBar";
+// local imports
+// ------------------
+import Repositories from "./views/Repositories";
 import SignIn from "./views/SignIn";
+import Repository from "./views/Repository";
+
+import AppBar from "./components/AppBar";
 import paths from './paths';
+// =====================
 
 import { NativeRouter, Route, Routes } from 'react-router-native';
 import { StyleSheet, View } from 'react-native';
@@ -26,11 +31,15 @@ export default function Main()
                 <Routes>
                     <Route
                         path={paths.repositories}
-                        element={<RepositoryList />}
+                        element={<Repositories />}
                     />
                     <Route
                         path={paths.login}
                         element={<SignIn />}
+                    />
+                    <Route
+                        path={`${paths.repository}/:repoId`}
+                        element={<Repository />}
                     />
                 </Routes>
             </View>

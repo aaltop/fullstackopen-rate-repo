@@ -1,4 +1,4 @@
-import RepositoryList from './components/RepositoryList';
+import RepositoryList from '../components/RepositoryList';
 import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({

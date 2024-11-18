@@ -2,11 +2,11 @@ import { languageTag } from "../styles";
 import Text from "./Text";
 import Stat from "./Stat";
 
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View, Button } from "react-native";
 
 
 
-export default function RepositoryItem({ item })
+export default function RepositoryItem({ item, showOpenUrl })
 {
 
     const {
@@ -40,6 +40,9 @@ export default function RepositoryItem({ item })
         stats: {
             flexDirection: "row",
             flexWrap: "wrap"
+        },
+        button: {
+            margin: 20
         }
     });
 
@@ -81,6 +84,17 @@ export default function RepositoryItem({ item })
                 <Stat number={reviewCount} text={"Reviews"} />
                 <Stat number={ratingAverage} text={"Rating"} />
             </View>
+            {
+                showOpenUrl
+                    ? <View style={viewStyles.button}>
+                    <Button
+                        onPress={() => console.log("Hallo")}
+                        title="Open on Github"
+                        di
+                    />
+                </View>
+                    : null
+            }
         </View>
     );
 }

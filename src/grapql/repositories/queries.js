@@ -11,3 +11,11 @@ export const REPOSITORIES = gql`
         }
     }
 `
+
+export const REPOSITORY = gql`
+    query Repository($id: ID!) {
+        repository(id: $id) {
+            ...RepositoryItem
+        }
+    }
+`

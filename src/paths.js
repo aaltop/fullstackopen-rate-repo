@@ -6,5 +6,6 @@
 export default {
     home: "/",
     repositories: "/",
-    login: "/login"
+    login: "/login",
+    repository: "/repository"
 }

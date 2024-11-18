@@ -1,6 +1,6 @@
 import SignIn from "../../components/SignIn";
 
-import { screen, render, waitFor, userEvent, act} from "@testing-library/react-native";
+import { screen, render, waitFor, userEvent } from "@testing-library/react-native";
 
 
 describe("Sign-in form", () => {

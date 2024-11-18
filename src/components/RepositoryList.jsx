@@ -1,8 +1,10 @@
 import RepositoryItem from './RepositoryItem';
 import theme from '../theme';
 import useRepositories from '../hooks/useRepositories';
+import paths from '../paths';
 
 import { FlatList, View, StyleSheet } from 'react-native';
+import { Link } from 'react-router-native';
 
 // const repositories = [
 //   {
@@ -60,17 +62,27 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
+function RenderItem({ item })
+{
+
+    return <Link
+        to={`${paths.repository}/${item.id}`}
+    >
+        <RepositoryItem item={item} showOpenUrl={false}/>
+    </Link>;
+}
+
 export function RepositoryListContainer({ repositories, style })
 {
 
-        return (
-            <FlatList
-                style={style}
-                data={repositories}
-                ItemSeparatorComponent={ItemSeparator}
-                renderItem={RepositoryItem}
-            />
-        );
+    return (
+        <FlatList
+            style={style}
+            data={repositories}
+            ItemSeparatorComponent={ItemSeparator}
+            renderItem={RenderItem}
+        />
+    );
 }
 
 
