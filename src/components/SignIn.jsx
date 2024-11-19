@@ -7,12 +7,12 @@ import * as yup from "yup";
 
 const loginSchema = yup.object().shape({
     username: yup.string()
-        .min(3, "Username should be at least 3 characters")
-        .max(32, "Username should be at most 32 characters")
+        .min(3, "Username should be at least ${min} characters")
+        .max(32, "Username should be at most ${max} characters")
         .required("Username is required"),
     password: yup.string()
-        .min(8, "Password should be at least 8 characters")
-        .max(20, "Password should be at most 20 characters")
+        .min(8, "Password should be at least ${min} characters")
+        .max(20, "Password should be at most ${max} characters")
         .required("Password is required")
 });
 
