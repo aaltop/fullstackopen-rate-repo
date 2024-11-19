@@ -3,24 +3,34 @@ import Text from "./Text";
 import { View, StyleSheet } from "react-native";
 
 const viewStyles = StyleSheet.create({
+    container: {
+        alignItems: "center"
+    },
     rating: {
         flexGrow: 0,
         width: 50,
         height: 50,
         borderRadius: 25,
         borderWidth: 3,
-        textAlign: "center",
         alignContent: "center",
-        marginInline: 12
+        marginLeft: 12,
+        marginRight: 12
     },
     info: {
-        flexGrow: 1
+        justifyContent: "center",
+        height: 50,
     },
     ratingAndInfo: {
-        flexDirection: "row"
+        width: "100%",
+        maxWidth: 500,
+        flexDirection: "row",
+        alignItems: "flex-start",
     },
     review: {
-        flexWrap: "wrap"
+        flexWrap: "wrap",
+        maxWidth: 500,
+        paddingLeft: 25,
+        paddingRight: 25,
     }
 });
 
@@ -48,14 +58,16 @@ export default function RepositoryReview({ item })
 
     const extraStyles = StyleSheet.create({
         rating: {
-            color: ratingColor,
             borderColor: ratingColor,
-        }
+            color: ratingColor,
+            textAlign: "center",
+            textAlignVertical: "center",
+        },
     });
 
     const dateString = (new Date(createdAt)).toLocaleDateString();
 
-    return <View>
+    return <View style={viewStyles.container}>
         <View style={viewStyles.ratingAndInfo}>
             <Text style={[viewStyles.rating, extraStyles.rating]} fontWeight={"bold"}>
                 {rating}

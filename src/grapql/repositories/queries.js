@@ -23,6 +23,7 @@ export const REPOSITORY = gql`
 export const REVIEWS = gql`
     query Reviews($id: ID!) {
         repository(id: $id) {
+            id
             reviews {
                 edges {
                     node {
