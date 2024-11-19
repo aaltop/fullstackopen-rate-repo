@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function TextInput({ label, errorMessage, ...props })
+export default function TextInput({ label, errorMessage, style: passedStyle, ...props })
 {
 
     const labelComp = label ? <Text>{label}</Text> : null;
@@ -40,7 +40,8 @@ export default function TextInput({ label, errorMessage, ...props })
                 <BaseTextInput
                     style={[styles.input,
                         inputSize.style,
-                        hasError && styles.inputError
+                        hasError && styles.inputError,
+                        passedStyle
                     ]}
                     selectionColor={"black"}
                     {...props}
