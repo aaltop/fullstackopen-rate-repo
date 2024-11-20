@@ -2,6 +2,7 @@ import { RepositoryListContainer } from "../../components/RepositoryList";
 import { numberInThousands } from "../../utils/misc";
 
 import { render, screen } from "@testing-library/react-native";
+import { NativeRouter } from "react-router-native";
 
 
 describe('RepositoryList', () => {
@@ -52,7 +53,7 @@ describe('RepositoryList', () => {
 
             const reps = repositories.edges.map(edge => edge.node);
 
-            render(<RepositoryListContainer repositories={reps} />);
+            render(<NativeRouter><RepositoryListContainer repositories={reps} /></NativeRouter>);
             
             // component renders repository's name, description, 
             // language, forks count, stargazers count, rating average, 
