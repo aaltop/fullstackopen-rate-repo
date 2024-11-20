@@ -2,6 +2,7 @@ import TabLink from "./AppBarTab/Link";
 import TabButton from "./AppBarTab/Button";
 import { USER } from "../grapql/users/queries";
 import useAuthStorage from "../hooks/useAuthStorage";
+import paths from "../paths";
 
 import { View, StyleSheet, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
@@ -43,6 +44,8 @@ const AppBar = () => {
     // not sure if this makes a lot of sense
     if (queryUser.loading) return null;
 
+    const loggedIn = !!queryUser.data?.me?.id;
+
     return <View style={styles.container}>
         <ScrollView
             style={styles.scrollView}
@@ -50,10 +53,11 @@ const AppBar = () => {
             snapToInterval={100} // need to synchronise this with the tab width
             horizontal
         >
-            <TabLink text={"Repositories"} path={"/"}/>
-            {queryUser.data?.me?.id
+            <TabLink text={"Repositories"} path={paths.repositories}/>
+            {loggedIn && <TabLink text="Create A Review" path={paths.newReview}/>}
+            {loggedIn
                 ? <LogOut />
-                : <TabLink text="Sign in" path={"/login"}/>
+                : <TabLink text="Sign in" path={paths.login}/>
             }
         </ScrollView>
     </View>;

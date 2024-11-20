@@ -6,7 +6,10 @@ export default function useRepoReviews(id)
 {
     const { loading, error, data } = useQuery(
         REVIEWS,
-        { variables: { id } }
+        {
+            variables: { id },
+            fetchPolicy: "cache-and-network"
+        }
     )
 
     if (loading || error || !data) return [];

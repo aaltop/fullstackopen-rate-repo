@@ -7,5 +7,6 @@ export default {
     home: "/",
     repositories: "/",
     login: "/login",
-    repository: "/repository"
+    repository: "/repository",
+    newReview: "/new/review"
 }

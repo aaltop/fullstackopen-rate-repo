@@ -3,6 +3,7 @@
 import Repositories from "./views/Repositories";
 import SignIn from "./views/SignIn";
 import Repository from "./views/Repository";
+import CreateReview from "./views/CreateReview";
 
 import AppBar from "./components/AppBar";
 import paths from './paths';
@@ -40,6 +41,10 @@ export default function Main()
                     <Route
                         path={`${paths.repository}/:repoId`}
                         element={<Repository />}
+                    />
+                    <Route
+                        path={`${paths.newReview}`}
+                        element={<CreateReview />}
                     />
                 </Routes>
             </View>
