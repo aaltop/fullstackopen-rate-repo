@@ -3,7 +3,7 @@ import FormikTextInput from "./FormikTextInput";
 import { signupSchema } from "../schemas/login";
 import FormikWithSchema from "./FormikWithSchema";
 
-export default function SignUp({ onSubmit, disabled })
+export default function SignUp({ onSubmit, disabled, message })
 {
 
     const formContent = [
@@ -35,6 +35,7 @@ export default function SignUp({ onSubmit, disabled })
                 handleSubmit={handleSubmit}
                 buttonTitle={"Sign up"}
                 disabled={disabled}
+                message={message}
             >
                 {formContent.map(content => <FormikTextInput 
                     key={content.valueName}

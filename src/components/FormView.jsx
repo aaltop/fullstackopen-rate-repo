@@ -1,3 +1,5 @@
+import Message from "./Message";
+
 import { StyleSheet, View, Button } from "react-native";
 
 
@@ -10,8 +12,11 @@ const styles = StyleSheet.create({
         flexGrow: 1
     }
 });
-
-export default function FormikForm({ handleSubmit, disabled, children, buttonTitle })
+/**
+ * 
+ * `message`: { text: string, error: boolean }
+ */
+export default function FormView({ handleSubmit, disabled, children, buttonTitle, message })
 {
 
     return <View
@@ -24,5 +29,8 @@ export default function FormikForm({ handleSubmit, disabled, children, buttonTit
             title={buttonTitle}
             disabled={disabled ?? false}
         />
+        <Message error={!!message?.error}>
+            {message?.text}
+        </Message>
     </View>;
 }

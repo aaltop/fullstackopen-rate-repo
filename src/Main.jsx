@@ -4,7 +4,7 @@ import Repositories from "./views/Repositories";
 import SignIn from "./views/SignIn";
 import Repository from "./views/Repository";
 import CreateReview from "./views/CreateReview";
-import SignUp from "./views/SIgnUp";
+import SignUp from "./views/SignUp";
 
 import AppBar from "./components/AppBar";
 import paths from './paths';

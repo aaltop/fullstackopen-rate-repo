@@ -7,3 +7,14 @@ export const AUTHENTICATE = gql`
         }
     }
 `;
+
+
+export const SIGN_UP = gql`
+    mutation SignUp($user: CreateUserInput!) {
+    createUser(user: $user) {
+            id
+            username
+            createdAt
+        }
+    }
+`;
