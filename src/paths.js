@@ -8,5 +8,6 @@ export default {
     repositories: "/",
     login: "/login",
     repository: "/repository",
-    newReview: "/new/review"
+    newReview: "/new/review",
+    signUp: "/signup"
 }

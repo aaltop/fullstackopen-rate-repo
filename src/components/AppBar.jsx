@@ -55,10 +55,10 @@ const AppBar = () => {
         >
             <TabLink text={"Repositories"} path={paths.repositories}/>
             {loggedIn && <TabLink text="Create A Review" path={paths.newReview}/>}
-            {loggedIn
-                ? <LogOut />
-                : <TabLink text="Sign in" path={paths.login}/>
-            }
+            {!loggedIn && <TabLink text="Sign in" path={paths.login}/>}
+            {!loggedIn && <TabLink text="Sign up" path={paths.signUp}/>}
+            
+            {loggedIn && <LogOut />}
         </ScrollView>
     </View>;
 };

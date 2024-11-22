@@ -1,20 +1,9 @@
 import TextInput from "./TextInput";
 import { formikErrorCheck } from "../utils";
+import { loginSchema } from "../schemas/login";
 
 import { Formik } from "formik";
 import { View, Button, StyleSheet } from "react-native";
-import * as yup from "yup";
-
-const loginSchema = yup.object().shape({
-    username: yup.string()
-        .min(3, "Username should be at least ${min} characters")
-        .max(32, "Username should be at most ${max} characters")
-        .required("Username is required"),
-    password: yup.string()
-        .min(8, "Password should be at least ${min} characters")
-        .max(20, "Password should be at most ${max} characters")
-        .required("Password is required")
-});
 
 const styles = StyleSheet.create({
     container: {
