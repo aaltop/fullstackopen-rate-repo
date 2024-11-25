@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
         width: "50%",
         marginLeft: "25%",
         marginRight: "25%",
-        backgroundColor: "#fff",
         borderRadius: 10
     }
 });
