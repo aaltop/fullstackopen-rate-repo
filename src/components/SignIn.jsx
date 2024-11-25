@@ -1,5 +1,5 @@
 import TextInput from "./TextInput";
-import { formikErrorCheck } from "../utils";
+import { formikErrorCheck } from "../utils/formik";
 import { loginSchema } from "../schemas/login";
 
 import { Formik } from "formik";

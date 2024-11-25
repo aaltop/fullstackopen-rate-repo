@@ -1,4 +1,4 @@
-import { formikErrorCheck } from "../utils";
+import { formikErrorCheck } from "../utils/formik";
 import TextInput from "./TextInput";
 
 
