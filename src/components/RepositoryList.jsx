@@ -4,6 +4,7 @@ import useRepositories from '../hooks/useRepositories';
 import useModalPicker from '../hooks/useModalPicker';
 import paths from '../paths';
 import ModalPicker from './ModalPicker';
+import Text from "./Text";
 
 import { FlatList, View, StyleSheet, Button } from 'react-native';
 import { Link } from 'react-router-native';
@@ -60,11 +61,23 @@ const styles = StyleSheet.create({
       height: 10,
       backgroundColor: theme.colors.offWhite
     },
-    sortView: {
+    sortButtonsView: {
         flexDirection: "row",
-        gap: 10,
+        gap: 10
+    },
+    sortButtonView: {
+        width: 200
+    },
+    sortPrefix: {
+        minWidth: 100,
+        textAlignVertical: "center",
+        textAlign: "center"
+    },
+    sortView: {
         marginTop: 20,
-        marginBottom: 20
+        marginBottom: 20,
+        width: "100%",
+        gap: 10
     }
 });
 
@@ -80,11 +93,27 @@ function RenderItem({ item })
     </Link>;
 }
 
+function SortButton({ prefix, title, onPress })
+{
+    return <View style={styles.sortButtonsView}>
+        <Text
+            style={styles.sortPrefix}
+            fontSize={"subheading"}
+            fontWeight={"bold"}
+        >
+            {prefix}
+        </Text>
+        <View style={styles.sortButtonView}>
+            <Button color={theme.colors.primary} title={title} onPress={onPress}/>
+        </View>
+    </View>;
+}
+
 function SortOptions({ criteria, direction })
 {
     return <View style={styles.sortView}>
-        <Button title={criteria.title} onPress={() => criteria.setVisible(true)}/>
-        <Button title={direction.title} onPress={() => direction.setVisible(true)}/>
+        <SortButton prefix={"Sorted By"} title={criteria.text} onPress={() => criteria.setVisible(true)}/>
+        <SortButton prefix={"Sort Order"} title={direction.text} onPress={() => direction.setVisible(true)}/>
     </View>;
 }
 
@@ -113,8 +142,8 @@ export function RepositoryListContainer({
                 ItemSeparatorComponent={ItemSeparator}
                 renderItem={RenderItem}
                 ListHeaderComponent={() => <SortOptions
-                    criteria={{ title: "Order By", setVisible: sortCriteriaState.state.setVisible}}
-                    direction={{ title: "Order Direction", setVisible: sortDirectionState.state.setVisible}}
+                    criteria={{ text: sortCriteriaState.getText(), setVisible: sortCriteriaState.state.setVisible}}
+                    direction={{ text: sortDirectionState.getText(), setVisible: sortDirectionState.state.setVisible}}
 
                 />}
             />
@@ -126,7 +155,7 @@ export function RepositoryListContainer({
 const RepositoryList = ({ style }) => {
 
     const sortCriteriaState = useModalPicker([
-        {value: "CREATED_AT", text: "Creation date (date of first review)"},
+        {value: "CREATED_AT", text: "Date of first review"},
         {value: "RATING_AVERAGE", text: "Average rating"}
     ]);
     const sortDirectionState = useModalPicker([
