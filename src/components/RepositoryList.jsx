@@ -97,7 +97,6 @@ export function RepositoryListContainer({
 {
 
 
-    console.log(sortCriteriaState);
     return (
         <View>
             <ModalPicker

@@ -48,10 +48,10 @@ const styles = StyleSheet.create({
 });
 
 
-function Choice({ value, setValue, text, isChosen})
+function Choice({ idx, setIdx, text, isChosen})
 {
 
-    return <Pressable onPress={() => setValue(value)}>
+    return <Pressable onPress={() => setIdx(idx)}>
         <Text style={[styles.choice, isChosen && styles.chosenChoice]}>
             {text}
         </Text>
@@ -64,20 +64,21 @@ function Choice({ value, setValue, text, isChosen})
  * value property is the value of the choice, text is the rendered text
  * to represent the choice. 
  */
-export default function Picker({ title, data, onConfirm, onBack, oldValue })
+export default function Picker({ title, data, onConfirm, onBack, oldIdx })
 {
-    const [value, setValue] = useState(oldValue ?? null);
+    const [idx, setIdx] = useState(oldIdx ?? null);
 
     return <View>
             <Text style={styles.title} fontWeight={"bold"}>{title}</Text>
         <ScrollView
             contentContainerStyle={styles.container}
         >
-            {data.map((datum, idx) => <Choice
-                key={idx}
-                setValue={setValue} 
-                isChosen={datum.value === value}
-                {...datum}
+            {data.map((datum, i) => <Choice
+                key={i}
+                idx={i}
+                setIdx={setIdx}
+                isChosen={i === idx}
+                text={datum.text}
             />
             )}
         </ScrollView>
@@ -85,8 +86,8 @@ export default function Picker({ title, data, onConfirm, onBack, oldValue })
             <View style={styles.button}>
                 <Button
                     title={"Confirm"}
-                    onPress={() => onConfirm(value)}
-                    disabled={value === null}
+                    onPress={() => onConfirm(idx)}
+                    disabled={idx === null}
                 />
             </View>
             <View style={styles.button}>

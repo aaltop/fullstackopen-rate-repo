@@ -2,15 +2,16 @@
 
 import { useState } from "react";
 
-export default function useModalPicker(data, defaultValue)
+export default function useModalPicker(data, defaultIdx = 0)
 {
 
     const [visible, setVisible] = useState(false);
-    defaultValue = defaultValue ?? data[0].value;
-    const [currentValue, setValue] = useState(defaultValue);
+    const [currentIdx, setIdx] = useState(defaultIdx);
 
     return {
         data,
-        state: { visible, setVisible, currentValue, setValue, defaultValue }
+        getValue: () => data[currentIdx].value,
+        getText: () => data[currentIdx].text,
+        state: { visible, setVisible, currentIdx, setIdx, defaultIdx }
     };
 }

@@ -5,16 +5,16 @@ import Modal from "./Modal";
 export default function ModalPicker({
     title,
     data,
-    state: { visible, setVisible, currentValue, setValue, _defaultValue } 
+    state: { visible, setVisible, currentIdx, setIdx, _defaultIdx } 
 })
 {
     return <Modal visible={visible} onRequestClose={() => setVisible(false)}>
         <Picker
             title={title}
             data={data}
-            onConfirm={value => {setValue(value); setVisible(false)}}
+            onConfirm={idx => {setIdx(idx); setVisible(false)}}
             onBack={() => setVisible(false)}
-            oldValue={currentValue}
+            oldIdx={currentIdx}
         />
     </Modal>;
 }
