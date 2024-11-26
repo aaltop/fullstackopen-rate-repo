@@ -159,11 +159,11 @@ const RepositoryList = ({ style }) => {
         {value: "RATING_AVERAGE", text: "Average rating"}
     ]);
     const sortDirectionState = useModalPicker([
+        { value: "DESC", text: "Descending"},
         { value: "ASC", text: "Ascending"},
-        { value: "DESC", text: "Descending"}
     ]);
 
-    const repositories = useRepositories();
+    const repositories = useRepositories(sortCriteriaState.getValue(), sortDirectionState.getValue());
 
     return <RepositoryListContainer
         repositories={repositories}
