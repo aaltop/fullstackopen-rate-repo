@@ -4,7 +4,8 @@ import { View, StyleSheet } from "react-native";
 
 const viewStyles = StyleSheet.create({
     container: {
-        alignItems: "center"
+        alignItems: "center",
+        width: "100%"
     },
     rating: {
         flexGrow: 0,
@@ -24,7 +25,7 @@ const viewStyles = StyleSheet.create({
         width: "100%",
         maxWidth: 500,
         flexDirection: "row",
-        alignItems: "flex-start",
+        alignItems: "flex-start"
     },
     review: {
         flexWrap: "wrap",

@@ -23,6 +23,7 @@ export const REVIEW_ITEM_WITH_REPO = gql`
     fragment ReviewItemWithRepo on Review {
         ...ReviewItemBase
         repository {
+            id
             fullName
         }
     }

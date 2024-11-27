@@ -10,10 +10,10 @@ const styles = StyleSheet.create({
 });
 
 
-export default function ReviewList({ reviewsData, ...props })
+export default function ReviewList({ reviewsData, renderItem, ...props })
 {
     return <FlatList
-        renderItem={RepositoryReview}
+        renderItem={renderItem ?? RepositoryReview}
         data={reviewsData}
         ItemSeparatorComponent={<View style={styles.separator} />}
         {...props}
