@@ -5,9 +5,12 @@ import useModalPicker from '../hooks/useModalPicker';
 import paths from '../paths';
 import ModalPicker from './ModalPicker';
 import Text from "./Text";
+import TextInput from "./TextInput";
 
 import { FlatList, View, StyleSheet, Button } from 'react-native';
 import { Link } from 'react-router-native';
+import { useState } from "react";
+import { useDebounce } from "use-debounce";
 
 // const repositories = [
 //   {
@@ -74,10 +77,18 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
     sortView: {
-        marginTop: 20,
-        marginBottom: 20,
         width: "100%",
         gap: 10
+    },
+    listHeader: {
+        marginTop: 20,
+        marginBottom: 20,
+        marginLeft: "5%",
+        marginRight: "5%",
+        
+    },
+    searchBar: {
+        marginBottom: 20
     }
 });
 
@@ -91,6 +102,16 @@ function RenderItem({ item })
     >
         <RepositoryItem item={item} showOpenUrl={false}/>
     </Link>;
+}
+
+function SearchBar({ onChangeSearch, defaultValue})
+{
+    return <TextInput
+        style={styles.searchBar}
+        placeholder={"Search for repository or owner"}
+        defaultValue={defaultValue}
+        onChangeText={onChangeSearch}
+    />;
 }
 
 function SortButton({ prefix, title, onPress })
@@ -121,10 +142,10 @@ export function RepositoryListContainer({
     repositories,
     sortCriteriaState,
     sortDirectionState,
+    searchBarProps,
     style
 })
 {
-
 
     return (
         <View>
@@ -141,11 +162,14 @@ export function RepositoryListContainer({
                 data={repositories}
                 ItemSeparatorComponent={ItemSeparator}
                 renderItem={RenderItem}
-                ListHeaderComponent={() => <SortOptions
-                    criteria={{ text: sortCriteriaState.getText(), setVisible: sortCriteriaState.state.setVisible}}
-                    direction={{ text: sortDirectionState.getText(), setVisible: sortDirectionState.state.setVisible}}
-
-                />}
+                ListHeaderComponent={<View style={styles.listHeader}>
+                    <SearchBar {...searchBarProps}/>
+                    <SortOptions
+                        criteria={{ text: sortCriteriaState.getText(), setVisible: sortCriteriaState.state.setVisible}}
+                        direction={{ text: sortDirectionState.getText(), setVisible: sortDirectionState.state.setVisible}}
+                    />
+                </View>
+                }
             />
         </View>
     );
@@ -163,6 +187,9 @@ const RepositoryList = ({ style }) => {
         { value: "ASC", text: "Ascending"},
     ]);
 
+    const [search, setSearch] = useState("");
+    const [searchDebounce] = useDebounce(search, 500);
+
     const repositories = useRepositories(sortCriteriaState.getValue(), sortDirectionState.getValue());
 
     return <RepositoryListContainer
@@ -170,6 +197,7 @@ const RepositoryList = ({ style }) => {
         style={style}
         sortCriteriaState={sortCriteriaState}
         sortDirectionState={sortDirectionState}
+        searchBarProps={{onChangeSearch: setSearch, defaultValue: search === "" ? undefined : search}}
     />;
 };
 
