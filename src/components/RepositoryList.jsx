@@ -104,12 +104,11 @@ function RenderItem({ item })
     </Link>;
 }
 
-function SearchBar({ onChangeSearch, defaultValue})
+function SearchBar({ onChangeSearch })
 {
     return <TextInput
         style={styles.searchBar}
         placeholder={"Search for repository or owner"}
-        defaultValue={defaultValue}
         onChangeText={onChangeSearch}
     />;
 }
@@ -190,14 +189,18 @@ const RepositoryList = ({ style }) => {
     const [search, setSearch] = useState("");
     const [searchDebounce] = useDebounce(search, 500);
 
-    const repositories = useRepositories(sortCriteriaState.getValue(), sortDirectionState.getValue());
+    const repositories = useRepositories(
+        sortCriteriaState.getValue(),
+        sortDirectionState.getValue(),
+        searchDebounce
+    );
 
     return <RepositoryListContainer
         repositories={repositories}
         style={style}
         sortCriteriaState={sortCriteriaState}
         sortDirectionState={sortDirectionState}
-        searchBarProps={{onChangeSearch: setSearch, defaultValue: search === "" ? undefined : search}}
+        searchBarProps={{onChangeSearch: setSearch}}
     />;
 };
 
