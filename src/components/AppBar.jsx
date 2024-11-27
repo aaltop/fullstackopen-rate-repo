@@ -7,6 +7,7 @@ import paths from "../paths";
 import { View, StyleSheet, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import { useQuery, useApolloClient } from "@apollo/client";
+import { useNavigate } from "react-router-native";
 
 const styles = StyleSheet.create({
     scrollView: {
@@ -24,9 +25,11 @@ function LogOut()
 {
     const authStorage = useAuthStorage();
     const apolloClient = useApolloClient();
+    const navigate = useNavigate();
 
     function logOut()
     {
+        navigate(paths.home);
         authStorage.removeAccessToken();
         apolloClient.resetStore();
     }
