@@ -40,7 +40,8 @@ export default function RepositoryReview({ item })
         text,
         rating,
         createdAt,
-        user
+        user,
+        repository
     } = item;
 
     let ratingColor;
@@ -74,7 +75,7 @@ export default function RepositoryReview({ item })
             </Text>
             <View style={viewStyles.info}>
                 <Text fontWeight={"bold"}>
-                    {user.username}
+                    {user?.username ?? repository.fullName}
                 </Text>
                 <Text>
                     {dateString}

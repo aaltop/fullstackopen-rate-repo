@@ -9,5 +9,6 @@ export default {
     login: "/login",
     repository: "/repository",
     newReview: "/new/review",
-    signUp: "/signup"
+    signUp: "/signup",
+    userReviews: "/userReviews"
 }

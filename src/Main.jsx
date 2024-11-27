@@ -5,6 +5,7 @@ import SignIn from "./views/SignIn";
 import Repository from "./views/Repository";
 import CreateReview from "./views/CreateReview";
 import SignUp from "./views/SignUp";
+import UserReviews from "./views/UserReviews";
 
 import AppBar from "./components/AppBar";
 import paths from './paths';
@@ -50,6 +51,10 @@ export default function Main()
                     <Route
                         path={paths.signUp}
                         element={<SignUp />}
+                    />
+                    <Route
+                        path={paths.userReviews}
+                        element={<UserReviews />}
                     />
                 </Routes>
             </View>

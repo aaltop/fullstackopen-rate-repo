@@ -55,6 +55,7 @@ const AppBar = () => {
         >
             <TabLink text={"Repositories"} path={paths.repositories}/>
             {loggedIn && <TabLink text="Create A Review" path={paths.newReview}/>}
+            {loggedIn && <TabLink text="My Reviews" path={paths.userReviews}/>}
             {!loggedIn && <TabLink text="Sign in" path={paths.login}/>}
             {!loggedIn && <TabLink text="Sign up" path={paths.signUp}/>}
             

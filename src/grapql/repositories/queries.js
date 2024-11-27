@@ -37,14 +37,7 @@ export const REVIEWS = gql`
             reviews {
                 edges {
                     node {
-                    id
-                    text
-                    rating
-                    createdAt
-                        user {
-                            id
-                            username
-                        }
+                    ...ReviewItemWithUser
                     }
                 }
             }

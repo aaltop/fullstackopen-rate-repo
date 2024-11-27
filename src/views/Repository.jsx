@@ -1,16 +1,9 @@
 import useRepository from "../hooks/useRepository";
 import RepositoryItem from "../components/RepositoryItem";
-import RepositoryReview from "../components/RepositoryReview";
+import ReviewList from "../components/ReviewList";
 import useRepoReviews from "../hooks/useRepoReviews";
 
 import { useParams } from "react-router-native";
-import { FlatList, View, StyleSheet } from "react-native";
-
-const styles = StyleSheet.create({
-    separator: {
-        height: 10
-    }
-});
 
 export default function Repository()
 {
@@ -20,10 +13,8 @@ export default function Repository()
 
     if (!repository) return null;
 
-    return <FlatList
-        renderItem={RepositoryReview}
-        data={repoReviews}
-        ItemSeparatorComponent={<View style={styles.separator} />}
+    return <ReviewList
+        reviewsData={repoReviews}
         ListHeaderComponent={<RepositoryItem item={repository} showOpenUrl={true} />}
     />;
 }
