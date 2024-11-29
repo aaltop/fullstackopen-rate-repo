@@ -3,11 +3,23 @@ import allFragments from '../grapql/allFragments';
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from "@apollo/client/link/context";
 import { createFragmentRegistry } from "@apollo/client/cache";
+import { relayStylePagination } from "@apollo/client/utilities";
 import env from "../env";
 
 const httpLink = createHttpLink({
     uri: env.apollo_uri
 });
+
+const cache = new InMemoryCache({
+    fragments: createFragmentRegistry(allFragments),
+    typePolicies: {
+        Repository: {
+            fields: {
+                reviews: relayStylePagination()
+            }
+        }
+    }
+})
 
 const createApolloClient = (authStorage) => {
 
@@ -30,9 +42,7 @@ const createApolloClient = (authStorage) => {
 
   return new ApolloClient({
     link: authLink.concat(httpLink),
-    cache: new InMemoryCache({
-        fragments: createFragmentRegistry(allFragments)
-    })
+    cache
   });
 };
 

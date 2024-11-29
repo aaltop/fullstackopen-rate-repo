@@ -31,15 +31,20 @@ export const REPOSITORY = gql`
 `
 
 export const REVIEWS = gql`
-    query Reviews($id: ID!) {
+    query Reviews($id: ID!, $first: Int, $after: String) {
         repository(id: $id) {
             id
-            reviews {
+            reviews(first: $first, after: $after) {
                 edges {
                     node {
                     ...ReviewItemWithUser
                     }
                 }
+                pageInfo {
+                    hasNextPage
+                    endCursor
+                }
+                totalCount
             }
         }
     }
