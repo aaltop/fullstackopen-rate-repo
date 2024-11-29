@@ -2,8 +2,9 @@ import ReviewList from "../components/ReviewList";
 import useUserReviews from "../hooks/useUserReviews";
 import RepositoryReview from "../components/RepositoryReview";
 import paths from "../paths";
+import useDeleteReview from "../hooks/useDeleteReview";
 
-import { View, Button, StyleSheet } from "react-native";
+import { View, Button, StyleSheet, Alert } from "react-native";
 import { useNavigate } from "react-router-native";
 
 const styles = StyleSheet.create({
@@ -22,8 +23,25 @@ const styles = StyleSheet.create({
     }
 });
 
-function RenderItem({item, navigate})
+function RenderItem({item, navigate, deleteReview })
 {
+
+    function DeletionAlert()
+    {
+        return Alert.alert(
+            "Delete review",
+            "Are you sure you want to delete this review?",
+            [
+                {
+                    text: "Cancel",
+                },
+                {
+                    text: "Delete",
+                    onPress: () => deleteReview(item.id)
+                }
+            ]
+        );
+    }
 
     return <View style={styles.container}>
         <RepositoryReview item={item} />
@@ -35,7 +53,7 @@ function RenderItem({item, navigate})
             <Button
                 title="Delete Review"
                 color={"crimson"}
-                onPress={() => console.log("clicked on delete")}
+                onPress={DeletionAlert}
             />
         </View>
     </View>;
@@ -44,10 +62,18 @@ function RenderItem({item, navigate})
 export default function UserReviews()
 {
     const userAndReviews = useUserReviews();
+    const [deleteReview, _deleteReviewResult] = useDeleteReview();
     const navigate = useNavigate();
 
     return <ReviewList
         reviewsData={userAndReviews?.reviews ?? []}
-        renderItem={({item}) => <RenderItem item={item} navigate={navigate}/>}
+        renderItem={({item}) => <RenderItem 
+            item={item} 
+            navigate={navigate}
+            deleteReview={async id => {
+                await deleteReview(id);
+                userAndReviews.refetch();
+            }}
+        />}
     />;
 }
